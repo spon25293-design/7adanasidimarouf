@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام حضانة السعادة الذكي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #ff6b6b; --secondary: #4ecdc4; --dark: #2d3436; }
+        body { font-family: 'Tajawal', sans-serif; background: radial-gradient(circle at top right, #fff5f5, #fff0e0); min-height: 100vh; overflow-x: hidden; }
+        
+        /* تأثيرات اسم المطور */
+        .developer-name {
+            font-family: 'Reem Kufi', sans-serif;
+            background: linear-gradient(45deg, #ff0080, #7928ca, #ff0080);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        /* أنيميشن الخلفية والرموز */
+        .hero-anime { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+        
+        .bg-blob {
+            position: fixed; width: 300px; height: 300px; background: rgba(255, 107, 107, 0.1);
+            filter: blur(80px); border-radius: 50%; z-index: -1; animation: move 20s infinite alternate;
+        }
+
+        @keyframes move { from { top: -10%; right: -10%; } to { bottom: 10%; left: 10%; } }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* تصميم البطاقات على الهاتف */
+        @media (max-width: 768px) {
+            tr { display: block; margin-bottom: 1.5rem; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+            td { display: flex; justify-content: space-between; padding: 8px 0 !important; border: none !important; border-bottom: 1px dashed #eee !important; }
+            td:last-child { border: none !important; }
+            td::before { content: attr(data-label); font-weight: bold; color: #888; font-size: 0.8rem; }
+            thead { display: none; }
+        }
+
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.4); }
+    </style>
+</head>
+<body>
+    <div class="bg-blob"></div>
+
+    <div class="fixed top-4 right-4 z-50 glass p-3 px-5 rounded-2xl shadow-xl border-b-4 border-pink-500 flex flex-col items-center animate-bounce">
+        <span class="text-[10px] text-gray-500 font-bold">DEVELOPED BY</span>
+        <span class="developer-name text-lg font-bold">✨ محمد بوالرواين ✨</span>
+    </div>
+
+    <div id="home-screen" class="min-h-screen flex flex-col items-center justify-center p-6">
+        <div class="relative">
+            <div class="text-[120px] hero-anime">👶</div>
+            <div class="absolute -top-4 -right-4 text-4xl animate-pulse">✨</div>
+            <div class="absolute bottom-0 -left-8 text-5xl animate-bounce">🎨</div>
+        </div>
+        <h1 class="text-5xl font-black text-gray-800 mb-2 mt-4 text-center">حضانة <span class="text-pink-500">الإبداع</span></h1>
+        <p class="text-gray-500 text-lg mb-10 text-center max-w-md italic">حيث تتحول الخطوات الأولى إلى أحلام كبيرة</p>
+        
+        <div class="grid grid-cols-1 gap-4 w-full max-w-xs">
+            <button onclick="showSection('parent')" class="bg-pink-500 text-white p-5 rounded-3xl font-bold shadow-[0_10px_20px_rgba(236,72,153,0.3)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+                <span>📝 تسجيل طفل جديد</span>
+            </button>
+            <button onclick="showSection('login')" class="glass text-blue-600 p-5 rounded-3xl font-bold shadow-lg hover:bg-blue-50 active:scale-95 transition-all flex items-center justify-center gap-2 border-2 border-blue-100">
+                <span>👩‍🏫 بوابة المعلمة</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="parent-section" class="hidden min-h-screen p-4 py-12">
+        <div class="max-w-xl mx-auto glass rounded-[40px] p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-pink-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-2">
+                <span class="bg-pink-500 text-white p-2 rounded-2xl text-sm">FORM</span>
+                بيانات العبقري الصغير
+            </h2>
+            
+            <div class="space-y-4 relative">
+                <input type="text" id="c_name" placeholder="الاسم الكامل للطفل" class="w-full p-4 rounded-2xl border-2 border-gray-100 focus:border-pink-400 outline-none transition-all">
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="number" id="c_age" placeholder="العمر" class="p-4 rounded-2xl border-2 border-gray-100 focus:border-pink-400 outline-none">
+                    <select id="c_gender" class="p-4 rounded-2xl border-2 border-gray-100 focus:border-pink-400 outline-none bg-white">
+                        <option value="">الجنس</option>
+                        <option value="ذكر">ذكر 👦</option>
+                        <option value="أنثى">أنثى 👧</option>
+                    </select>
+                </div>
+
+                <input type="tel" id="m_phone" placeholder="رقم هاتف الولي" class="w-full p-4 rounded-2xl border-2 border-gray-100 focus:border-pink-400 outline-none">
+                <textarea id="c_desc" placeholder="وصف الطفل أو ملاحظات هامة..." class="w-full p-4 rounded-2xl border-2 border-gray-100 focus:border-pink-400 h-28 outline-none"></textarea>
+
+                <div class="bg-white/50 p-6 rounded-3xl border-2 border-dashed border-pink-200">
+                    <label class="font-bold text-pink-600 block mb-3">تفاصيل الاشتراك</label>
+                    <select id="reg_type" onchange="toggleInputs()" class="w-full p-3 rounded-xl border-2 border-pink-50 mb-3 outline-none">
+                        <option value="monthly">اشتراك شهري (30 يوم)</option>
+                        <option value="daily">دفع يومي</option>
+                    </select>
+                    <div id="monthly_input">
+                        <label class="text-xs text-gray-400">تاريخ أول يوم حضور:</label>
+                        <input type="date" id="start_date" class="w-full p-3 rounded-xl border-2 border-gray-100 mt-1 outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="saveKid()" class="w-full mt-8 bg-gray-900 text-white py-5 rounded-3xl font-bold text-lg shadow-xl hover:bg-black transition-all">إتمام التسجيل ✨</button>
+            <button onclick="showSection('home')" class="w-full mt-4 text-gray-400 font-bold">إلغاء</button>
+        </div>
+    </div>
+
+    <div id="teacher-section" class="hidden min-h-screen p-4 md:p-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                <div>
+                    <h1 class="text-3xl font-black text-gray-800">مرحباً <span class="text-blue-600">أستاذة وهيبة</span> 👋</h1>
+                    <p class="text-gray-500">لديكِ <span id="count" class="font-bold text-blue-600">0</span> أطفال تحت رعايتك</p>
+                </div>
+                <button onclick="showSection('home')" class="bg-red-50 text-red-500 px-6 py-3 rounded-2xl font-bold border border-red-100">تسجيل الخروج</button>
+            </div>
+
+            <div class="overflow-hidden">
+                <table class="w-full text-right">
+                    <thead class="bg-white glass">
+                        <tr>
+                            <th class="p-5 text-gray-400 font-medium">تاريخ التسجيل</th>
+                            <th class="p-5 text-gray-800 font-bold">الطفل</th>
+                            <th class="p-5 text-gray-800 font-bold">الجنس</th>
+                            <th class="p-5 text-gray-800 font-bold text-pink-500">تاريخ الانتهاء</th>
+                            <th class="p-5 text-gray-800 font-bold">الملاحظات</th>
+                            <th class="p-5 text-center">إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="kids-table" class="divide-y divide-gray-100"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-section" class="hidden min-h-screen flex items-center justify-center p-4">
+        <div class="glass p-10 rounded-[40px] shadow-2xl w-full max-w-md border-t-8 border-blue-600 text-center">
+            <div class="text-5xl mb-4">🔐</div>
+            <h2 class="text-2xl font-bold mb-6">الدخول الآمن للأستاذة</h2>
+            <input type="text" id="userIn" placeholder="اسم المستخدم" class="w-full p-4 mb-4 rounded-2xl border-2 outline-none focus:border-blue-500">
+            <input type="password" id="passIn" placeholder="كلمة المرور" class="w-full p-4 mb-6 rounded-2xl border-2 outline-none focus:border-blue-500">
+            <button onclick="handleLogin()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-200">دخول النظام</button>
+            <button onclick="showSection('home')" class="mt-4 text-gray-400 block w-full text-sm">العودة للرئيسية</button>
+        </div>
+    </div>
+
+    <script>
+        let db = JSON.parse(localStorage.getItem('nursery_pro_db')) || [];
+
+        function showSection(id) {
+            document.querySelectorAll('div[id$="-screen"], div[id$="-section"]').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id + (id === 'home' ? '-screen' : '-section')).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function toggleInputs() {
+            document.getElementById('monthly_input').classList.toggle('hidden', document.getElementById('reg_type').value === 'daily');
+        }
+
+        function handleLogin() {
+            if(document.getElementById('userIn').value === 'wahiba2005' && document.getElementById('passIn').value === 'mouha2005') {
+                showSection('teacher');
+                renderTable();
+            } else { alert("❌ عذراً! المعلومات غير صحيحة"); }
+        }
+
+        function saveKid() {
+            const name = document.getElementById('c_name').value;
+            const phone = document.getElementById('m_phone').value;
+            const start = document.getElementById('start_date').value;
+            const type = document.getElementById('reg_type').value;
+
+            if(!name || !phone) return alert("من فضلك أدخلي اسم الطفل ورقم الهاتف");
+
+            // حساب تاريخ انتهاء الاشتراك (30 يوم)
+            let endStr = "يومي متجدد";
+            if(type === 'monthly' && start) {
+                let d = new Date(start);
+                d.setDate(d.getDate() + 30);
+                endStr = d.toISOString().split('T')[0];
+            }
+
+            const kid = {
+                id: Date.now(),
+                regDate: new Date().toLocaleDateString('ar-DZ'),
+                name: name,
+                age: document.getElementById('c_age').value || "?",
+                gender: document.getElementById('c_gender').value || "غير محدد",
+                phone: phone,
+                desc: document.getElementById('c_desc').value || "لا توجد ملاحظات",
+                type: type,
+                end: endStr
+            };
+
+            db.push(kid);
+            localStorage.setItem('nursery_pro_db', JSON.stringify(db));
+            alert("🎉 تمت الإضافة بنجاح! أهلاً بك يا " + name);
+            showSection('home');
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('kids-table');
+            const countLabel = document.getElementById('count');
+            tbody.innerHTML = '';
+            countLabel.innerText = db.length;
+
+            db.forEach(k => {
+                // فحص إذا كان الاشتراك قد انتهى
+                const isExpired = k.end !== "يومي متجدد" && new Date(k.end) < new Date();
+                
+                tbody.innerHTML += `
+                    <tr class="bg-white/50 hover:bg-white transition-all group">
+                        <td class="p-5 text-xs text-gray-400" data-label="تاريخ التسجيل">${k.regDate}</td>
+                        <td class="p-5" data-label="الطفل">
+                            <div class="font-bold text-gray-800">${k.name}</div>
+                            <div class="text-[10px] text-blue-500">${k.type === 'monthly' ? 'إشتراك شهري' : 'حضور يومي'}</div>
+                        </td>
+                        <td class="p-5" data-label="الجنس">${k.gender} (${k.age} س)</td>
+                        <td class="p-5 font-bold ${isExpired ? 'text-red-500 animate-pulse' : 'text-green-600'}" data-label="تاريخ الانتهاء">
+                            ${k.end}
+                            ${isExpired ? ' <span class="text-[8px] block">(انتهى!)</span>' : ''}
+                        </td>
+                        <td class="p-5 text-xs text-gray-500 italic max-w-xs" data-label="الملاحظات">${k.desc}</td>
+                        <td class="p-5" data-label="إجراءات">
+                            <div class="flex gap-2 justify-center">
+                                <a href="tel:${k.phone}" class="bg-green-500 text-white p-3 rounded-2xl shadow-lg hover:scale-110 transition">📞</a>
+                                <button onclick="deleteKid(${k.id})" class="bg-red-50 text-red-500 p-3 rounded-2xl hover:bg-red-500 hover:text-white transition">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>`;
+            });
+
+            if(db.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="p-20 text-center text-gray-300">لا توجد بيانات حالياً.. الحضانة فارغة 🏠</td></tr>';
+            }
+        }
+
+        function deleteKid(id) {
+            if(confirm('هل تريدين إزالة هذا الطفل من النظام؟')) {
+                db = db.filter(k => k.id !== id);
+                localStorage.setItem('nursery_pro_db', JSON.stringify(db));
+                renderTable();
+            }
+        }
+    </script>
+</body>
+</html>
